@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+  <!-- <button id="ajaxButton" type="button">Make a request</button> -->
+</body>
+<script type="text/javascript">
+	window.onload = (event) => {
+	  console.log('page is fully loaded');
+	  makeRequest();
+	};
+	function makeRequest() {
+	    httpRequest = new XMLHttpRequest();
+
+	    if (!httpRequest) {
+	      alert('Giving up :( Cannot create an XMLHTTP instance');
+	      return false;
+	    }
+	    httpRequest.onreadystatechange = alertContents;
+	    httpRequest.open('GET', 'http://localhost:8000/api/demo/tryOn/users/60f7ca49c048fe57098c0b56/rings/60ff9be8c7b259a68c266aff');
+	    httpRequest.send();
+	  }
+	  function alertContents() {
+	    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+	      if (httpRequest.status === 200) {
+	        alert(httpRequest.responseText);
+	      } else {
+	        alert('There was a problem with the request.');
+	      }
+	    }
+	  }
+</script>
+</html>
